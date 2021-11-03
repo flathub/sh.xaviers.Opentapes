@@ -37,9 +37,9 @@ modules:
     build-commands:
       - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn install --offline --ignore-scripts
-      - yarn build
+      - yarn run --offline build
       - cargo --offline fetch --manifest-path src-tauri/Cargo.toml --verbose
-      - cd src-tauri && cargo build --release
+      - cd src-tauri && cargo build
       - cargo install tauri-cli --version 1.0.0-beta.7 --offline
       - cargo tauri build --debug
       - install -Dm755 -t /app/bin/ src-tauri/target/debug/bundle/deb/*/data/usr/bin/opentapes
