@@ -29,20 +29,20 @@ modules:
     sources:
       - type: archive
         # For next release: https://codeberg.org/xaviers/Opentapes/archive/0.x.0.tar.gz
-        url: https://codeberg.org/xaviers/Opentapes/archive/main.tar.gz
-        sha256: f7e219ca55609d90a7f07e3df858511ce90b1a5eee3c6c443c64b666993fb307
+        url: https://codeberg.org/xaviers/Opentapes/archive/bugfix/flatpak-pinephone-issue.tar.gz
+        sha256: baaab421e6df5cad2dc23148779f41ed8e81b8a853b6ec897d05045f9a71e44e
       - node-sources.json
       - cargo-sources.json
     buildsystem: simple
     build-commands:
       - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn install --offline --ignore-scripts
-      - yarn build
+      - yarn run --offline build
       - cargo --offline fetch --manifest-path src-tauri/Cargo.toml --verbose
-      - cd src-tauri && cargo build --release
+      - cd src-tauri && cargo build
       - cargo install tauri-cli --version 1.0.0-beta.7 --offline
-      - cargo tauri build
-      - install -Dm755 -t /app/bin/ src-tauri/target/release/bundle/deb/*/data/usr/bin/opentapes
+      - cargo tauri build --debug
+      - install -Dm755 -t /app/bin/ src-tauri/target/debug/bundle/deb/*/data/usr/bin/opentapes
       - install -Dm644 -t /app/share/applications/ resources/sh.xaviers.Opentapes.desktop
       - install -Dm644 -t /app/share/metainfo/ resources/sh.xaviers.Opentapes.appdata.xml
-      - for i in 16 32 128 256 512;do install -Dm644 src-tauri/target/release/bundle/deb/*/data/usr/share/icons/hicolor/${i}x${i}/apps/opentapes.png /app/share/icons/hicolor/${i}x${i}/apps/opentapes.png;done
+      - for i in 16 32 128 256 512;do install -Dm644 src-tauri/target/debug/bundle/deb/*/data/usr/share/icons/hicolor/${i}x${i}/apps/opentapes.png /app/share/icons/hicolor/${i}x${i}/apps/opentapes.png;done
