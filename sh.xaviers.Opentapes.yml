@@ -18,6 +18,7 @@ build-options:
   append-path: /usr/lib/sdk/node16/bin:/usr/lib/sdk/rust-stable/bin
   env:
     NPM_CONFIG_LOGLEVEL: info
+    NODE_OPTIONS: --openssl-legacy-provider
     CARGO_HOME: /run/build/Opentapes/cargo
     RUST_BACKTRACE: '1'
 cleanup:
