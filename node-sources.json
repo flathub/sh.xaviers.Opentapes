@@ -12150,5 +12150,23 @@
         "sha512": "f9ac9bbd7bffc5a7cbe88ebbb921f9c8b1eb4b2e3f39a48e57db678b0e32645207a4835751c72d54713f5b31f138e36b2f6187cc9f05778883acdc9a4ba4d56e",
         "dest-filename": "zopflipng-bin-6.0.1.tgz",
         "dest": "flatpak-node/yarn-mirror"
+    },
+    {
+        "type": "script",
+        "commands": [
+            "version=$(node --version | sed \"s/^v//\")",
+            "nodedir=$(dirname \"$(dirname \"$(which node)\")\")",
+            "mkdir -p \"flatpak-node/cache/node-gyp/$version\"",
+            "ln -s \"$nodedir/include\" \"flatpak-node/cache/node-gyp/$version/include\"",
+            "echo 9 > \"flatpak-node/cache/node-gyp/$version/installVersion\""
+        ],
+        "dest-filename": "setup_sdk_node_headers.sh",
+        "dest": "flatpak-node"
+    },
+    {
+        "type": "shell",
+        "commands": [
+            "bash flatpak-node/setup_sdk_node_headers.sh"
+        ]
     }
 ]
