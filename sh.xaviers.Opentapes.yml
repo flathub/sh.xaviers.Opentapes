@@ -4,7 +4,7 @@ runtime: org.gnome.Platform
 runtime-version: '45'
 sdk: org.gnome.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node16
+  - org.freedesktop.Sdk.Extension.node18
   - org.freedesktop.Sdk.Extension.rust-stable
 rename-icon: opentapes
 finish-args:
@@ -15,7 +15,7 @@ finish-args:
   - --socket=pulseaudio
   - --share=network
 build-options:
-  append-path: /usr/lib/sdk/node16/bin:/usr/lib/sdk/rust-stable/bin
+  append-path: /usr/lib/sdk/node18/bin:/usr/lib/sdk/rust-stable/bin
   env:
     NPM_CONFIG_LOGLEVEL: info
     NODE_OPTIONS: --openssl-legacy-provider
